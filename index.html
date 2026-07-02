@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>과학실험실 안전 브리핑</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --ink:#0E2E2B;
+    --ink-soft:#3A5551;
+    --paper:#EDF2F1;
+    --card:#FFFFFF;
+    --line:#D6E0DE;
+    --brand:#0F3D3A;
+    --brand-bright:#14A093;
+
+    /* 안전수칙 */
+    --c-rule:#14A093;
+    /* 사고 대처 그룹 색상 */
+    --c-trauma:#D64545;   /* 외상 / 날카로운 도구·낙하 */
+    --c-burn:#E8792B;     /* 화상·화재 */
+    --c-chem:#7C5CBF;     /* 화학·시약 */
+    --c-bone:#5B7085;     /* 골절 */
+    --c-shock:#D6971E;    /* 감전 */
+    --c-etc:#12A08F;      /* 기타(초등) */
+    --c-symp:#3D8BD4;     /* 이상 증상 */
+    --c-bio:#3FA85A;      /* 생물원 */
+
+    /* 과목 색상 */
+    --s-elem:#12A08F;
+    --s-phys:#E15C5C;
+    --s-chem:#7C5CBF;
+    --s-bio:#3FA85A;
+    --s-earth:#2FA36B;
+
+    /* CCC */
+    --ccc-check:#3FA85A;
+    --ccc-call:#E8792B;
+    --ccc-care:#D64545;
+
+    --radius:16px;
+    --shadow:0 2px 10px rgba(14,46,43,.06),0 12px 28px rgba(14,46,43,.05);
+    --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--font);
+    background:var(--paper);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  .wrap{max-width:1400px;margin:0 auto;padding:0 20px 64px;}
+
+  /* ============ HEADER ============ */
+  header{
+    background:var(--brand);
+    color:#fff;
+    position:sticky;top:0;z-index:50;
+    box-shadow:0 6px 22px rgba(14,46,43,.18);
+  }
+  .header-in{
+    max-width:1400px;margin:0 auto;padding:14px 22px;
+    display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:14px;flex:1;min-width:260px;}
+  .brand .mark{
+    width:52px;height:52px;border-radius:14px;flex:none;
+    background:linear-gradient(150deg,var(--brand-bright),#0C8378);
+    display:grid;place-items:center;font-size:28px;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.15);
+  }
+  .brand h1{font-size:26px;font-weight:800;margin:0;letter-spacing:-.02em;line-height:1.1;}
+  .brand p{margin:2px 0 0;font-size:13.5px;color:#A9D8D1;font-weight:500;}
+  .clock{
+    text-align:right;font-variant-numeric:tabular-nums;
+    color:#CDEBE6;font-weight:600;font-size:14px;line-height:1.25;min-width:96px;
+  }
+  .clock b{display:block;font-size:20px;color:#fff;font-weight:800;letter-spacing:.02em;}
+  .btn-119{
+    display:flex;align-items:center;gap:10px;
+    background:#E23B3B;color:#fff;border:none;cursor:pointer;
+    font-family:var(--font);font-weight:800;font-size:19px;
+    padding:12px 20px;border-radius:14px;letter-spacing:.02em;
+    box-shadow:0 6px 16px rgba(226,59,59,.4);
+  }
+  .btn-119 .ring{
+    width:12px;height:12px;border-radius:50%;background:#fff;
+    box-shadow:0 0 0 0 rgba(255,255,255,.7);
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.7);}
+    70%{box-shadow:0 0 0 12px rgba(255,255,255,0);}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}
+  }
+
+  /* ============ MAIN TABS ============ */
+  .tabs{
+    display:flex;gap:12px;flex-wrap:wrap;
+    padding:22px 0 6px;position:sticky;top:80px;z-index:40;
+  }
+  .tab{
+    flex:1;min-width:210px;
+    display:flex;align-items:center;gap:14px;
+    background:var(--card);border:2px solid var(--line);
+    border-radius:var(--radius);padding:16px 20px;cursor:pointer;
+    font-family:var(--font);text-align:left;transition:transform .15s,border-color .15s,box-shadow .15s;
+    color:var(--ink);
+  }
+  .tab:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+  .tab .ic{
+    width:46px;height:46px;flex:none;border-radius:12px;
+    display:grid;place-items:center;font-size:26px;color:#fff;
+  }
+  .tab .tx{line-height:1.2;}
+  .tab .tx b{display:block;font-size:20px;font-weight:800;letter-spacing:-.02em;}
+  .tab .tx span{font-size:13px;color:var(--ink-soft);font-weight:500;}
+  .tab[data-tab="rules"] .ic{background:var(--c-rule);}
+  .tab[data-tab="first"] .ic{background:var(--c-trauma);}
+  .tab[data-tab="ccc"]   .ic{background:var(--ccc-call);}
+  .tab.active{border-color:var(--brand);box-shadow:var(--shadow);}
+  .tab.active[data-tab="rules"]{border-color:var(--c-rule);}
+  .tab.active[data-tab="first"]{border-color:var(--c-trauma);}
+  .tab.active[data-tab="ccc"]{border-color:var(--ccc-call);}
+
+  .panel{display:none;animation:fade .3s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  .section-head{
+    display:flex;align-items:baseline;gap:14px;margin:26px 2px 16px;flex-wrap:wrap;
+  }
+  .section-head h2{font-size:24px;font-weight:800;margin:0;letter-spacing:-.02em;}
+  .section-head .hint{font-size:14px;color:var(--ink-soft);font-weight:500;}
+
+  /* ============ RULES 10 ============ */
+  .rules-hero{
+    background:linear-gradient(135deg,#0F3D3A,#14857A);
+    color:#fff;border-radius:20px;padding:22px 26px;margin-top:22px;
+    display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+    box-shadow:var(--shadow);
+  }
+  .rules-hero .big{
+    font-size:64px;font-weight:800;line-height:.9;letter-spacing:-.04em;
+    font-variant-numeric:tabular-nums;
+  }
+  .rules-hero .big small{font-size:22px;font-weight:700;display:block;color:#A9D8D1;letter-spacing:0;}
+  .rules-hero p{margin:0;font-size:16px;color:#DCF1EE;max-width:560px;}
+  .rules-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:14px;margin-top:16px;
+  }
+  .rule{
+    background:var(--card);border-radius:var(--radius);padding:18px 20px;
+    display:flex;gap:16px;align-items:flex-start;border:1px solid var(--line);
+    box-shadow:0 1px 3px rgba(14,46,43,.05);transition:transform .15s,box-shadow .15s;
+  }
+  .rule:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+  .rule .num{
+    width:42px;height:42px;flex:none;border-radius:12px;
+    background:rgba(20,160,147,.12);color:var(--c-rule);
+    display:grid;place-items:center;font-size:20px;font-weight:800;
+    font-variant-numeric:tabular-nums;
+  }
+  .rule .em{font-size:26px;line-height:1;margin-top:1px;}
+  .rule p{margin:0;font-size:17.5px;font-weight:600;letter-spacing:-.01em;line-height:1.4;}
+
+  /* ============ SUBJECT SUBTABS ============ */
+  .subtabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;}
+  .subtab{
+    border:2px solid var(--line);background:var(--card);cursor:pointer;
+    font-family:var(--font);font-weight:700;font-size:16px;color:var(--ink-soft);
+    padding:10px 20px;border-radius:999px;transition:all .15s;
+    display:flex;align-items:center;gap:8px;
+  }
+  .subtab .dot{width:11px;height:11px;border-radius:50%;background:currentColor;}
+  .subtab:hover{transform:translateY(-1px);}
+  .subtab.active{color:#fff;border-color:transparent;}
+  .subtab[data-s="phys"].active{background:var(--s-phys);}
+  .subtab[data-s="chem"].active{background:var(--s-chem);}
+  .subtab[data-s="bio"].active{background:var(--s-bio);}
+  .subtab[data-s="earth"].active{background:var(--s-earth);}
+  .subtab[data-s="elem"].active{background:var(--s-elem);}
+
+  .groups{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+    gap:16px;margin-top:18px;align-items:start;
+  }
+  .group{
+    background:var(--card);border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line);box-shadow:0 1px 3px rgba(14,46,43,.05);
+  }
+  .group-head{
+    display:flex;align-items:center;gap:12px;padding:14px 18px;
+    color:#fff;font-weight:800;font-size:18px;letter-spacing:-.01em;
+  }
+  .group-head .em{font-size:22px;}
+  .group-body{padding:8px 18px 16px;}
+  .case{padding:12px 0;border-top:1px dashed var(--line);}
+  .case:first-child{border-top:none;}
+  .case .sit{font-size:16px;font-weight:800;color:var(--ink);margin:0 0 6px;letter-spacing:-.01em;}
+  .case ol,.case ul{margin:0;padding-left:0;list-style:none;}
+  .case li{
+    font-size:15.5px;color:var(--ink-soft);font-weight:500;line-height:1.5;
+    padding:3px 0 3px 26px;position:relative;
+  }
+  .case li .st{
+    position:absolute;left:0;top:3px;font-weight:800;color:var(--ink);
+    font-size:13px;background:rgba(14,46,43,.06);border-radius:6px;
+    width:20px;height:20px;display:grid;place-items:center;font-variant-numeric:tabular-nums;
+  }
+  .case li.plain{padding-left:16px;}
+  .case li.plain::before{content:"";position:absolute;left:2px;top:12px;width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5;}
+  .case li b.warn{color:var(--c-trauma);}
+
+  /* ============ CCC ============ */
+  .ccc-hero{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    margin-top:22px;font-weight:800;font-size:15px;color:var(--ink-soft);
+  }
+  .ccc-hero .step{
+    display:flex;align-items:center;gap:10px;background:var(--card);
+    border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+  }
+  .ccc-hero .step b{font-size:18px;}
+  .ccc-hero .arrow{color:var(--ink-soft);font-size:20px;}
+  .ccc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:16px;}
+  .ccc-col{background:var(--card);border-radius:var(--radius);border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow);}
+  .ccc-col .top{padding:18px 20px;color:#fff;}
+  .ccc-col .top .kw{font-size:30px;font-weight:800;letter-spacing:.04em;line-height:1;}
+  .ccc-col .top .kr{font-size:17px;font-weight:700;margin-top:4px;opacity:.92;}
+  .ccc-col[data-c="check"] .top{background:var(--ccc-check);}
+  .ccc-col[data-c="call"] .top{background:var(--ccc-call);}
+  .ccc-col[data-c="care"] .top{background:var(--ccc-care);}
+  .ccc-col .list{padding:14px 20px 18px;}
+  .ccc-col .item{padding:11px 0;border-top:1px solid var(--line);display:flex;gap:12px;}
+  .ccc-col .item:first-child{border-top:none;}
+  .ccc-col .item .em{font-size:22px;line-height:1.2;flex:none;}
+  .ccc-col .item p{margin:0;font-size:16px;font-weight:600;color:var(--ink);line-height:1.45;}
+  .ccc-col .item p small{display:block;font-size:13px;font-weight:500;color:var(--ink-soft);margin-top:3px;}
+
+  /* ============ CONTACTS ============ */
+  .contacts{
+    background:var(--card);border-radius:var(--radius);border:1px solid var(--line);
+    box-shadow:var(--shadow);margin-top:22px;overflow:hidden;
+  }
+  .contacts .ch{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    padding:16px 20px;background:#0F3D3A;color:#fff;
+  }
+  .contacts .ch b{font-size:18px;font-weight:800;}
+  .contacts .ch span{font-size:13px;color:#A9D8D1;font-weight:500;}
+  .contacts .grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;
+  }
+  .cfield{padding:16px 20px;border-right:1px solid var(--line);border-top:1px solid var(--line);}
+  .cfield label{display:block;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:6px;}
+  .cfield .val119{font-size:26px;font-weight:800;color:#E23B3B;letter-spacing:.04em;}
+  .cfield input{
+    width:100%;border:none;background:transparent;font-family:var(--font);
+    font-size:20px;font-weight:800;color:var(--ink);padding:0;letter-spacing:.01em;
+  }
+  .cfield input::placeholder{color:#B7C4C1;font-weight:600;}
+  .cfield input:focus{outline:none;}
+  .cfield.editing{background:rgba(20,160,147,.06);}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding:30px 0 0;font-weight:500;}
+  footer .src{opacity:.7;}
+
+  @media (max-width:640px){
+    .brand h1{font-size:21px;}
+    .rules-hero .big{font-size:48px;}
+    .tab{min-width:100%;}
+    .tabs{top:74px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <div class="brand">
+      <div class="mark">🧪</div>
+      <div>
+        <h1>과학실험실 안전 브리핑</h1>
+        <p>실험 시작 전 함께 확인하세요 · 교육부 · 한국과학창의재단 자료 기반</p>
+      </div>
+    </div>
+    <div class="clock" id="clock"><b>--:--</b><span id="date">----</span></div>
+    <button class="btn-119" onclick="document.getElementById('contacts')?.scrollIntoView({behavior:'smooth'})">
+      <span class="ring"></span>긴급 119
+    </button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="rules" onclick="showTab('rules',this)">
+      <span class="ic">📋</span>
+      <span class="tx"><b>안전 수칙 10</b><span>실험 전 기본 약속</span></span>
+    </button>
+    <button class="tab" data-tab="first" onclick="showTab('first',this)">
+      <span class="ic">🩹</span>
+      <span class="tx"><b>사고 대처 방법</b><span>과목별 응급 대응</span></span>
+    </button>
+    <button class="tab" data-tab="ccc" onclick="showTab('ccc',this)">
+      <span class="ic">🚑</span>
+      <span class="tx"><b>응급 조치 CCC</b><span>Check · Call · Care</span></span>
+    </button>
+  </nav>
+
+  <!-- ===== RULES ===== -->
+  <section class="panel active" id="rules">
+    <div class="rules-hero">
+      <div class="big">10<small>가지 약속</small></div>
+      <p>과학실험실에서 나와 친구 모두의 안전을 지키기 위한 10가지 기본 수칙입니다. 실험을 시작하기 전에 한 번씩 소리 내어 확인해요.</p>
+    </div>
+    <div class="rules-grid" id="rulesGrid"></div>
+  </section>
+
+  <!-- ===== FIRST AID ===== -->
+  <section class="panel" id="first">
+    <div class="subtabs" id="subtabs"></div>
+    <div class="section-head">
+      <h2 id="subjTitle"></h2>
+      <span class="hint">상황을 확인하고 침착하게 순서대로 대처하세요.</span>
+    </div>
+    <div class="groups" id="groups"></div>
+  </section>
+
+  <!-- ===== CCC ===== -->
+  <section class="panel" id="ccc">
+    <div class="ccc-hero">
+      <div class="step" style="color:var(--ccc-check)"><b>CHECK</b> 현장 파악</div>
+      <span class="arrow">→</span>
+      <div class="step" style="color:var(--ccc-call)"><b>CALL</b> 알림</div>
+      <span class="arrow">→</span>
+      <div class="step" style="color:var(--ccc-care)"><b>CARE</b> 처치·도움</div>
+    </div>
+    <div class="ccc-grid" id="cccGrid"></div>
+  </section>
+
+  <!-- ===== CONTACTS (shared) ===== -->
+  <div class="contacts" id="contacts">
+    <div class="ch">
+      <b>📞 비상 연락망</b>
+      <span>빈칸을 눌러 우리 학교 번호를 입력하세요 · 자동 저장됩니다</span>
+    </div>
+    <div class="grid" id="contactGrid"></div>
+  </div>
+
+  <footer>
+    <div>과학실험실 안전 브리핑 · 전자칠판용</div>
+    <div class="src">출처: 교육부 · 한국과학창의재단 「과학실험실 안전 자료」</div>
+  </footer>
+</div>
+
+<script>
+/* =================== DATA =================== */
+const RULES = [
+  ["👨‍🏫","과학실험실에서는 선생님의 지시를 따른다."],
+  ["📖","실험기구는 정확한 사용법을 숙지한 후 사용한다."],
+  ["🚪","비상구와 안전설비의 위치를 알아둔다."],
+  ["⚡","유리기구, 전기기구, 열원 사용 시 주의한다."],
+  ["🙅","음식물을 먹거나 화학물질을 맛보지 않는다."],
+  ["📢","사고가 발생하면 큰 소리로 알린다."],
+  ["🚫","실험 중 장난을 치거나 자리를 비우지 않는다."],
+  ["🚷","실험 기구와 약품을 밖으로 가져가지 않는다."],
+  ["🧹","실험 전·후에 실험대 주변을 정리정돈한다."],
+  ["🥽","안전장구를 착용하고 발이 노출되지 않는 신발을 신으며 긴 머리는 묶는다."],
+];
+
+/* 그룹 유형별 색상 / 아이콘 */
+const GT = {
+  trauma:{c:"var(--c-trauma)",em:"🩹"},
+  burn:{c:"var(--c-burn)",em:"🔥"},
+  chem:{c:"var(--c-chem)",em:"🧪"},
+  bone:{c:"var(--c-bone)",em:"🦴"},
+  shock:{c:"var(--c-shock)",em:"⚡"},
+  etc:{c:"var(--c-etc)",em:"➕"},
+  symp:{c:"var(--c-symp)",em:"😵‍💫"},
+  bio:{c:"var(--c-bio)",em:"🦠"},
+};
+
+/* 공통 케이스 조각 (중복 최소화) */
+const CASE = {
+  glass:{sit:"유리기구가 깨진 경우",steps:["깨진 유리 조각은 손으로 만지지 않고, 빗자루와 쓰레받기를 이용하여 치운다.","깨진 유리 기구는 신문지에 포장하거나 밀봉하여 안전하게 처리한다."]},
+  sharp:{sit:"날카로운 도구에 상처가 나 피가 난 경우",plain:["깨끗한 천으로 눌러 지혈한 뒤 소독한다."]},
+  drop:{sit:"무거운 물체를 발등에 떨어뜨리거나 넘어졌을 경우",steps:["상처 부위에 얇은 천으로 감싼 얼음 주머니를 붙여 얼음 찜질한다.","팔이나 다리에 타박상을 입은 경우 심장보다 높게 유지한다.","뼈가 부러졌을 때 부목과 붕대를 이용하여 고정하고 병원으로 이송한다."]},
+  burn:{sit:"화상을 입었을 경우",steps:["차가운 물로 씻고 열기를 식힌다.","물집이 생긴 경우 절대로 터트리지 않는다."]},
+  fire:{sit:"화재가 발생할 경우",steps:["'불이야!'라고 외쳐 선생님과 다른 학생들에게 상황을 알린다.","소방 담요나 젖은 수건 등으로 덮어서 불을 끈다."]},
+  bigfire:{sit:"큰 불이 났을 경우",steps:["큰 소리로 불이 난 것을 알리거나 화재경보기를 울리고 119에 신고한다.","몸을 낮춘 상태에서 수건 등으로 코와 입을 막고 비상대피로를 통해 밖으로 나간다."]},
+  clothesfire:{sit:"옷에 불이 붙은 경우",plain:["물에 젖은 실험복이나 소방용 담요로 덮어서 불을 끈다."]},
+  reagent:{sit:"시약이 눈에 튀거나 피부에 닿았을 경우",steps:["많은 양의 흐르는 물로 충분히 닦아낸다.","범위가 넓으면 비상 샤워기를 사용한다.","눈 근처의 경우 눈 세척기를 사용한다."]},
+  n2:{sit:"액체 질소에 노출되었을 경우",plain:["동상 부위가 덧나지 않도록 상처를 문지르지 않는다."]},
+  smell:{sit:"유독한 화학약품 냄새를 맡은 경우",plain:["실험실 밖으로 나와 옷을 느슨하게 하고 신선한 공기를 마신다."]},
+  dizzy:{sit:"어지러움을 느끼는 경우",plain:["옷을 느슨하게 한 후 편한 의자에 앉거나 눕는다."]},
+  device:{sit:"전기기구의 고장을 발견하거나 위험을 느꼈을 경우",plain:["함부로 만지지 않고 즉시 선생님께 알린다."]},
+  shockOther:{sit:"다른 학생이 감전되었을 경우",plain:["전원을 빠르게 차단하고 전기기구에서 환자를 즉시 분리한다."]},
+  shockUncon:{sit:"감전으로 학생의 의식이 없을 경우",steps:["안전한 바닥에 눕힌다.","119 구급대가 도착할 때까지 심폐소생술을 실시한다."]},
+  light:{sit:"강한 광원(레이저, 태양 등)에 노출되어 시야가 흐리거나 통증이 있는 경우",plain:["눈을 문지르지 말고 즉시 병원으로 이송한다."]},
+  acid:{sit:"강산·강염기 물질이 옷에 묻었을 경우",plain:["고무장갑을 낀 상태에서 묻은 물질을 털어낸다."]},
+};
+
+const SUBJECTS = [
+  {id:"chem", name:"화학", groups:[
+    {t:"chem", title:"시약에 의한 사고", cases:[CASE.reagent,CASE.acid,CASE.n2,CASE.smell]},
+    {t:"burn", title:"화상 및 화재 사고", cases:[CASE.burn,CASE.fire,CASE.clothesfire,CASE.bigfire]},
+    {t:"trauma", title:"외상 사고", cases:[CASE.glass,CASE.sharp,CASE.drop]},
+    {t:"symp", title:"이상 증상이 보이는 사고", cases:[CASE.dizzy,CASE.device]},
+  ]},
+  {id:"phys", name:"물리", groups:[
+    {t:"trauma", title:"외상 사고", cases:[CASE.glass,CASE.sharp,CASE.drop]},
+    {t:"burn", title:"화상 및 화재 사고", cases:[CASE.burn,CASE.fire,CASE.bigfire]},
+    {t:"shock", title:"감전 사고", cases:[CASE.device,CASE.shockOther,CASE.shockUncon]},
+    {t:"symp", title:"이상 증상이 보이는 사고", cases:[CASE.light,CASE.dizzy]},
+  ]},
+  {id:"bio", name:"생명과학", groups:[
+    {t:"bio", title:"생물원에 의한 사고", cases:[
+      {sit:"감염성 병원체(미생물)에 노출되었을 경우",steps:["노출된 부위를 흐르는 물에 깨끗이 씻는다.","소독용 에탄올로 노출된 부위를 소독한다."]},
+      {sit:"동물에 물리거나 벌에 쏘여 상처가 발생한 경우",steps:["물린 경우 상처 부위를 흐르는 물에 비누로 5~10분간 깨끗이 씻는다.","벌에 쏘인 경우 독침을 신용카드 등을 사용하여 밀어내 뽑고 얼음 찜질한다."]},
+      {sit:"특정 생물이나 물질에 알레르기가 있는 경우",steps:["실험 전 선생님께 알레르기가 있음을 알린다.","알레르기 반응이 일어나면 실험실 밖으로 나가 치료 받는다."]},
+    ]},
+    {t:"trauma", title:"날카로운 도구·낙하에 의한 사고", cases:[CASE.sharp,CASE.glass,CASE.drop]},
+    {t:"burn", title:"화상 및 화재 사고", cases:[CASE.fire,CASE.bigfire,CASE.burn,CASE.clothesfire]},
+    {t:"chem", title:"시약에 의한 사고", cases:[CASE.reagent,CASE.n2,CASE.smell]},
+  ]},
+  {id:"earth", name:"지구과학", groups:[
+    {t:"burn", title:"화상 및 화재 사고", cases:[CASE.fire,CASE.burn,CASE.bigfire]},
+    {t:"trauma", title:"외상 사고", cases:[CASE.light,CASE.glass,CASE.sharp]},
+    {t:"shock", title:"감전 사고", cases:[CASE.device,CASE.shockOther,CASE.shockUncon]},
+    {t:"chem", title:"시약에 의한 사고", cases:[CASE.reagent,CASE.smell]},
+  ]},
+  {id:"elem", name:"초등", groups:[
+    {t:"trauma", title:"외상 사고", cases:[
+      {sit:"긁히거나 베였을 때",plain:["출혈 부위를 압박하여 지혈한 뒤 소독한다."]},
+      {sit:"찔렸을 때",plain:["얕게 박힌 물체는 제거한 뒤 지혈 및 소독한다."]},
+    ]},
+    {t:"burn", title:"화상 사고", cases:[
+      {sit:"피부에 화상을 입었을 때",steps:["흐르는 차가운 물로 상처 부위의 열기를 제거한다.","화상 부위에 깨끗한 거즈를 대고 붕대로 감는다."]},
+    ]},
+    {t:"chem", title:"화학약품 사고", cases:[
+      {sit:"화학약품이 피부에 묻었을 때",plain:["흐르는 물로 충분히 씻는다."]},
+      {sit:"화학약품이 눈에 들어갔을 때",plain:["눈을 뜬 상태에서 흐르는 물로 충분히 씻는다."]},
+      {sit:"화학약품을 먹었을 때",plain:["입과 입 안을 씻고 미지근한 물이나 우유를 마시게 한 후 병원으로 이송한다."]},
+    ]},
+    {t:"bone", title:"골절 사고", cases:[
+      {sit:"뼈가 빠졌거나 부러졌을 때",plain:["손상된 상태 그대로 부목 등을 이용하여 고정한다."]},
+    ]},
+    {t:"etc", title:"기타 사고", cases:[
+      {sit:"눈이 강한 빛에 노출되었을 때",plain:["양쪽 눈을 모두 감고 눈에 자극을 주지 않는 상태에서 병원으로 이송한다."]},
+      {sit:"전기에 감전되었을 때",plain:["전원을 빠르게 차단하고 전기기구에서 환자를 즉시 분리한다."]},
+    ]},
+  ]},
+];
+
+const CCC = [
+  {c:"check", kw:"CHECK", kr:"현장 상황 파악", items:[
+    {em:"🔍",p:"환자 수, 환자 상태, 주변 위험요소를 파악한다."},
+    {em:"🚪",p:"필요시 학생을 안전하게 대피시킨다."},
+  ]},
+  {c:"call", kw:"CALL", kr:"알림", items:[
+    {em:"🗣️",p:"관리자와 보건교사에게 보고하고, 동료 교사에게 지원을 요청한다."},
+    {em:"🏥",p:"학생 상태에 따라 의료기관 이송 여부를 결정한다."},
+    {em:"📞",p:"필요시 119 등 유관기관에 협조를 요청한다."},
+    {em:"👪",p:"보호자에게 연락한다.",small:"부상·사고 상황을 설명하고 학생 이송 의료기관을 확인한다."},
+  ]},
+  {c:"care", kw:"CARE", kr:"처치 및 도움 (응급처치)", items:[
+    {em:"🧑‍⚕️",p:"구급대가 오거나 병원에 도착할 때까지 환자를 보호한다."},
+    {em:"🚑",p:"병원 이송 시 반드시 교사가 동행한다."},
+  ]},
+];
+
+const CONTACTS = [
+  {key:"fire", label:"소방서 / 구급", fixed:"119"},
+  {key:"hospital", label:"인근 병원", ph:"병원명 · 전화번호"},
+  {key:"nurse", label:"보건실 (보건교사)", ph:"내선 · 전화번호"},
+  {key:"office", label:"교무실", ph:"내선 · 전화번호"},
+  {key:"admin", label:"행정실", ph:"내선 · 전화번호"},
+];
+
+/* =================== RENDER =================== */
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+function renderRules(){
+  document.getElementById('rulesGrid').innerHTML = RULES.map((r,i)=>`
+    <div class="rule">
+      <div class="num">${i+1}</div>
+      <div class="em">${r[0]}</div>
+      <p>${esc(r[1])}</p>
+    </div>`).join('');
+}
+
+function caseHTML(cs){
+  let body='';
+  if(cs.steps){
+    body='<ol>'+cs.steps.map((s,i)=>`<li><span class="st">${i+1}</span>${esc(s)}</li>`).join('')+'</ol>';
+  }else if(cs.plain){
+    body='<ul>'+cs.plain.map(s=>`<li class="plain">${esc(s)}</li>`).join('')+'</ul>';
+  }
+  return `<div class="case"><p class="sit">${esc(cs.sit)}</p>${body}</div>`;
+}
+
+let curSubject='chem';
+function renderSubtabs(){
+  document.getElementById('subtabs').innerHTML = SUBJECTS.map(s=>`
+    <button class="subtab ${s.id===curSubject?'active':''}" data-s="${s.id}" onclick="showSubject('${s.id}',this)">
+      <span class="dot"></span>${s.name}
+    </button>`).join('');
+}
+function showSubject(id,el){
+  curSubject=id;
+  document.querySelectorAll('.subtab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderGroups();
+}
+function renderGroups(){
+  const s = SUBJECTS.find(x=>x.id===curSubject);
+  document.getElementById('subjTitle').textContent = s.name+' 실험실 사고 대처';
+  document.getElementById('groups').innerHTML = s.groups.map(g=>{
+    const gt=GT[g.t];
+    return `<div class="group" style="color:${gt.c}">
+      <div class="group-head" style="background:${gt.c}"><span class="em">${gt.em}</span>${esc(g.title)}</div>
+      <div class="group-body">${g.cases.map(caseHTML).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderCCC(){
+  document.getElementById('cccGrid').innerHTML = CCC.map(col=>`
+    <div class="ccc-col" data-c="${col.c}">
+      <div class="top"><div class="kw">${col.kw}</div><div class="kr">${esc(col.kr)}</div></div>
+      <div class="list">${col.items.map(it=>`
+        <div class="item"><span class="em">${it.em}</span>
+          <p>${esc(it.p)}${it.small?`<small>※ ${esc(it.small)}</small>`:''}</p>
+        </div>`).join('')}</div>
+    </div>`).join('');
+}
+
+/* ---- contacts w/ safe persistence ---- */
+function loadContacts(){try{return JSON.parse(localStorage.getItem('labSafetyContacts')||'{}');}catch(e){return {};}}
+function saveContacts(o){try{localStorage.setItem('labSafetyContacts',JSON.stringify(o));}catch(e){}}
+function renderContacts(){
+  const saved=loadContacts();
+  document.getElementById('contactGrid').innerHTML = CONTACTS.map(c=>{
+    if(c.fixed){
+      return `<div class="cfield"><label>${esc(c.label)}</label><div class="val119">${c.fixed}</div></div>`;
+    }
+    const v = saved[c.key]||'';
+    return `<div class="cfield"><label>${esc(c.label)}</label>
+      <input type="text" data-key="${c.key}" placeholder="${esc(c.ph)}" value="${esc(v)}"></div>`;
+  }).join('');
+  document.querySelectorAll('#contactGrid input').forEach(inp=>{
+    inp.addEventListener('input',()=>{
+      const o=loadContacts(); o[inp.dataset.key]=inp.value; saveContacts(o);
+    });
+    inp.addEventListener('focus',()=>inp.closest('.cfield').classList.add('editing'));
+    inp.addEventListener('blur',()=>inp.closest('.cfield').classList.remove('editing'));
+  });
+}
+
+/* ---- tabs ---- */
+function showTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- clock ---- */
+function tick(){
+  const d=new Date();
+  const days=['일','월','화','수','목','금','토'];
+  document.querySelector('#clock b').textContent =
+    String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  document.getElementById('date').textContent =
+    `${d.getMonth()+1}월 ${d.getDate()}일 (${days[d.getDay()]})`;
+}
+
+/* init */
+renderRules();
+renderSubtabs();
+renderGroups();
+renderCCC();
+renderContacts();
+tick(); setInterval(tick,1000*15);
+</script>
+</body>
+</html>
